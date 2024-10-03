@@ -2,6 +2,7 @@ package calc;
 
 import java.io.Console;
 
+// My super calculator
 public class CalculatorMark2 {
 
    // Constant
