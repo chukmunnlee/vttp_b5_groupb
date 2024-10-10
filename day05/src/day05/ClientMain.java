@@ -20,8 +20,9 @@ public class ClientMain {
 
       System.out.println("Connected!");
       
+      Console cons = System.console();
       // Write a message to the server
-      String theMessage = "hello, world";
+      String theMessage = cons.readLine("input: ");
 
       // Get the output stream
       OutputStream os = sock.getOutputStream();

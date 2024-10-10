@@ -1,30 +1,33 @@
 package day05;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Reader;
+import java.io.Writer;
 import java.net.*;
-import java.io.*;
-import java.util.*;
+import java.util.Date;
 
-public class ServerMain {
+// Work for a thread to perform
+public class ClientHandler implements Runnable {
 
-   public static void main(String[] args) throws IOException {
+   private final Socket sock;
+
+   public ClientHandler(Socket s) {
+      sock = s;
+   }
+
+   // Entry point for the thread
+   @Override
+   public void run() {
 
       String threadName = Thread.currentThread().getName();
 
-      // Set the default port to 3000
-      int port = 3000;
-      if (args.length > 0)
-         port = Integer.parseInt(args[0]);
-
-      // Create a server port, TCP
-      ServerSocket server = new ServerSocket(port);
-
-      while (true) {
-         // Wait for an incoming connection
-         System.out.printf("[%s] Waiting for connection on port %d\n", threadName, port);
-         Socket sock = server.accept();
-
-         System.out.println("Got a new connection");
-
+      try {
          // Get the input stream
          InputStream is = sock.getInputStream();
          Reader reader = new InputStreamReader(is);
@@ -38,7 +41,7 @@ public class ServerMain {
          // Read from the client
          String fromClient = br.readLine();
 
-         System.out.printf(">>> CLIENT: %s\n", fromClient);
+         System.out.printf(">>> [%s] CLIENT: %s\n", threadName, fromClient);
 
          // Process the data
          fromClient = (new Date()).toString() + " " + fromClient.toUpperCase();
@@ -52,8 +55,10 @@ public class ServerMain {
          os.close();
          is.close();
          sock.close();
+      } catch (IOException ex) {
+         // Exception handler
+         ex.printStackTrace();
       }
-
    }
 
 }
