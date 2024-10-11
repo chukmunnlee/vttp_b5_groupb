@@ -18,6 +18,12 @@ public class Toyota extends Car {
    @Override
    public void setMake(String m) { }
 
+	@Override
+   public void fuelGuage() {
+		super.fuelGuage();
+		System.out.printf("My fuel guage\n");
+	}
+
    public boolean isGps() { return gps; }
    public void setGps(boolean gps) { this.gps = gps; }
    
