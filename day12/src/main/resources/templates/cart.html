@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Cart</title>
+   </head>
+   <body>
+
+      <h1>My Shopping Cart</h1>
+
+      <h2>Hello <span data-th-text="${name}"></span></h2>
+
+      <div data-th-if="${count gt 10}">
+         <h3>Thank you for shopping with us</h3>
+      </div>
+      <div data-th-unless="${count gt 10}">
+         <h3>Are you sure you have everything you need?</h3>
+      </div>
+
+      <table border="1">
+         <thead>
+            <tr>
+               <th>Item</th>
+               <th>Quantity</th>
+            </tr>
+         </thead>
+         <tbody>
+            <!-- foreach (LineItem item: items) -->
+            <tr data-th-each="item, status: ${items}">
+               <td>
+                  <span data-th-text="${status.index}"></span>
+               </td>
+               <td>
+                  <span data-th-text="${item.name}"></span>
+               </td>
+               <td>
+                  <span data-th-text="${item.quantity}"></span>
+               </td>
+            </tr>
+         </tbody>
+      </table>
+
+      <div>
+         <a href="/"> <h3>Back</h3> </a>
+      </div>
+
+   </body>
+</html>

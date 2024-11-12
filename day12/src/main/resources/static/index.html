@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Welcome</title>
+</head>
+<body>
+
+   <h1>Welcome</h1>
+
+   <form method="GET" action="/cart/map">
+      <!-- controls -->
+      <table>
+         <tr>
+            <td> Name: </td>
+            <td>
+               <input type="text" name="name">
+            </td>
+         </tr>
+         <tr>
+            <td> Number of items: </td>
+            <td>
+               <input type="number" name="count">
+            </td>
+         </tr>
+         <tr>
+            <td> Delivery methods: </td>
+            <td>
+               <ul>
+                  <li> Rush <input type="checkbox" name="delivery" value="rush">, </li>
+                  <li> AM <input type="checkbox" name="delivery" value="am">, </li>
+                  <li> Insurance <input type="checkbox" name="delivery" value="insurance"> </li>
+               </ul>
+            </td>
+         </tr>
+         <tr>
+            <td></td>
+            <td>
+               <button type="submit"> Process </button>
+            </td>
+         </tr>
+      </table>
+
+   </form>
+   
+</body>
+</html>
