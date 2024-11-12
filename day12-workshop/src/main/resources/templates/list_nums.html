@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+   <h1>Here are your list of numbers</h1>
+
+   <h3> <a href="/">Back</a> </h3>
+
+   <div class="num-list">
+      <img data-th-each="img: ${values}"
+            data-th-src="${img}" class="thumbnail">
+   </div>
+   
+</body>
+</html>

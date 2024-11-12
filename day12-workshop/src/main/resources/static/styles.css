@@ -1,0 +1,11 @@
+.num-list {
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	row-gap: 2vh;
+}
+
+.thumbnail {
+	width: 10vw;
+	border: 5px grey solid;
+	border-radius: 8px;
+}
