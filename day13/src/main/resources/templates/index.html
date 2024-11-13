@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <link rel="stylesheet" href="/styles.css">
+</head>
+   <body>
+
+      <h1>Registration</h1>
+
+      <!--
+         A HTML form can only have the following 2 methods:
+            POST, GET
+      -->
+      <form method="POST" action="/registration/obj" data-th-object="${reg}">
+         <input type="hidden" value="this is a secret" name="passphrase">
+         <table>
+            <tr>
+               <td>Name: </td>
+               <td>
+                  <!-- setName(), getName() -->
+                  <input type="text" data-th-field="*{name}">
+                  <span 
+                     data-th-if="${#fields.hasErrors('name')}"
+                     data-th-errors="*{name}" data-th-errorclass="error">
+                  </span>
+               </td>
+            </tr>
+            <tr>
+               <td>Email: </td>
+               <td>
+                  <!-- setEmail(), getEmail() -->
+                  <input type="email" data-th-field="*{email}">
+                  <span 
+                     data-th-if="${#fields.hasErrors('email')}"
+                     data-th-errors="*{email}" data-th-errorclass="error">
+                  </span>
+               </td>
+            </tr>
+            <tr>
+               <td>Comments: </td>
+               <td>
+                  <!-- setComments(), getComments() -->
+                  <textarea name="comments" rows="5" cols="30" data-th-field="*{comments}"></textarea>
+               </td>
+            </tr>
+            <tr>
+               <td></td>
+               <td> <button type="submit">Add !</button> </td>
+            </tr>
+            <tr data-th-if="${#fields.hasErrors('global')}">
+               <td></td>
+               <td>
+                  <ul>
+                     <li 
+                        data-th-each="e: ${#fields.errors('global')}" 
+                        data-th-text="${e}"></li>
+                  </ul>
+               </td>
+            </tr>
+         </table>
+
+      </form>
+      
+   </body>
+</html>

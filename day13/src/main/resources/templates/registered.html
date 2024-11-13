@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+</head>
+<body>
+
+   <h1>You have been registered </h1>
+
+   <h2> The previous name: <span data-th-text="${prevName}"></span> </h2>
+
+   <h2> Please check your email <code data-th-text="${email}"></code> </h2>
+
+   <h2> Please check your email <code data-th-text="${reg.email}"></code> </h2>
+
+   <div data-th-object="${reg}">
+      <h2> Please check your email <code data-th-text="*{email}"></code> </h2>
+   </div>
+
+   <ol>
+      <li data-th-each="r: ${regList}">
+         <span data-th-text="${r.name}"></span>
+         <span data-th-text="${r.email}"></span>
+      </li>
+   </ol>
+
+   <form method="POST" action="/exit">
+      <button type="submit">Save !</button>
+      </form>
+
+   <h3>
+      <a href="/">Back</a>
+   </h3>
+   
+</body>
+</html>

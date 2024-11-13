@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+</head>
+<body>
+
+   <h1>Registration</h1>
+
+   <!--
+      A HTML form can only have the following 2 methods:
+         POST, GET
+   -->
+   <form method="POST" action="/registration">
+      <table>
+         <tr>
+            <td>Name: </td>
+            <td>
+               <input type="text" name="name" id="">
+            </td>
+         </tr>
+         <tr>
+            <td>Email: </td>
+            <td>
+               <input type="email" name="name" id="">
+            </td>
+         </tr>
+         <tr>
+            <td>Comments: </td>
+            <td>
+               <textarea name="comments" rows="5" cols="30"></textarea>
+            </td>
+         </tr>
+         <tr>
+            <td></td>
+            <td> <button type="submit">Add !</button> </td>
+         </tr>
+      </table>
+
+   </form>
+   
+</body>
+</html>
