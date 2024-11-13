@@ -1,0 +1,11 @@
+.apart {
+	display: flex;
+	justify-content: space-between;
+}
+
+.error {
+	color: red;
+	font-size: .8em;
+	font-family: monospace;
+	font-style: italic;
+}

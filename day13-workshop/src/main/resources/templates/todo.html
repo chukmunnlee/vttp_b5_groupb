@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Document</title>
+		<link rel="stylesheet" href="/styles.css">
+	</head>
+	<body>
+
+		<h1>My Tasks</h1>
+
+		<form method="POST" action="/task" data-th-object="${task}">
+			<table>
+				<tr>
+					<td> Task: </td>
+					<td>
+						<input type="text" data-th-field="*{name}">
+					</td>
+					<td>
+						<span data-th-if="${#fields.hasErrors('name')}" 
+								data-th-errors="*{name}" class="error">
+						</span>
+					</td>
+				</tr>
+				<tr>
+					<td> Priority: </td>
+					<td>
+						<select data-th-field="*{priority}">
+							<option value="low">LOW</option>
+							<option value="medium" selected>MEDIUM</option>
+							<option value="high">HIGH</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td> Due Date: </td>
+					<td>
+						<input type="date" data-th-field="*{dueDate}">
+					</td>
+					<td>
+						<span data-th-if="${#fields.hasErrors('dueDate')}" 
+								data-th-errors="*{dueDate}" class="error">
+						</span>
+					</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td> 
+						<div class="apart">
+							<button type="submit" formmethod="POST" formaction="/">Save</button>
+							<button type="submit">Add</button> 
+						</div>
+					</td>
+				</tr>
+			</table>
+		</form>
+
+		<hr>
+
+		<div data-th-if="${#lists.isEmpty(taskList)}">
+			<h3>Looks like you are free!</h3>
+		</div>
+
+		<div data-th-unless="${#lists.isEmpty(taskList)}">
+			<table border="1">
+				<thead>
+					<tr>
+						<th> Task Name </th>
+						<th> Priority </th>
+						<th> Due Date </th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr data-th-each="t: ${taskList}" data-th-object="${t}">
+						<td> <span data-th-text="*{name}"></span> </td>
+						<td> <span data-th-text="*{priority}"></span> </td>
+						<td> <span data-th-text="*{#dates.format(dueDate, 'dd MMM yyyy')}"></span> </td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+	</body>
+</html>
