@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+</head>
+<body>
+
+   <h1>Contact Information</h1>
+
+   <table data-th-object="${contact}">
+
+      <tr>
+         <td> Name: </td>
+         <td> <span data-th-text="*{name}"></span> </td>
+      </tr>
+      <tr>
+         <td> Email: </td>
+         <td> <span data-th-text="*{email}"></span> </td>
+      </tr>
+      <tr>
+         <td> Phone: </td>
+         <td> <span data-th-text="*{phone}"></span> </td>
+      </tr>
+
+   </table>
+
+   <h3> <a href="/"> Back </a> </h3>
+   
+</body>
+</html>

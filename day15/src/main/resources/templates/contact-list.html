@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>
+   </head>
+   <body>
+
+      <h1>List of Contacts</h1>
+
+      <ol>
+         <li data-th-each="i, s: ${ids}">
+            <a data-th-href="@{/contact/{id}(id=${i},format=${s.index})}">
+               <h4> <code data-th-text="${i}"></code> </h4>
+            </a>
+         </li>
+      </ol>
+
+      <h3> <a href="/"> Back </a> </h3>
+      
+   </body>
+</html>
