@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Document</title>
+	</head>
+	<body>
+
+		<h1>List of carts for <span data-th-text="${name}"></span> </h1>
+
+		<div data-th-if="${#lists.isEmpty(carts)}">
+			<h2>You have no carts</h2>
+		</div>
+
+		<div data-th-unless="${#lists.isEmpty(carts)}">
+			<h2>List of carts</h2>
+			<div data-th-each="c: ${carts}">
+				<a data-th-href="@{/cart/{id}(id=${c})}">
+					<h4 data-th-text="${c}"></h4>
+				</a>
+			</div>
+		</div>
+
+		<a data-th-href="@{/}"> <h3> Back </h3> </a>
+		
+	</body>
+</html>
