@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Cart</title>
+	</head>
+	<body>
+
+		<h2> Name: <span data-th-text="${name}"></span> </h2>
+		<h3> Cart: <span data-th-text="${cartId}"></span> </h3>
+
+		<form method="POST" data-th-action="@{/cart}">
+			<table data-th-object="${lineItem}">
+				<tr>
+					<td> Item: </td>
+					<td> <input type="text" name="name" size="30" data-th-field="*{name}"> </td>
+				</tr>
+				<tr>
+					<td> Quantity: </td>
+					<td> <input type="number" name="quantity" min="1" data-th-field="*{quantity}"> </td>
+				</tr>
+				<tr>
+					<td></td>
+					<td> 
+						<button type="submit" formaction="POST" data-th-formaction="@{/cart/{id}(id=${cartId})}"> Save cart </button> 
+						<button type="submit">Add to cart</button> 
+					</td>
+				</tr>
+			</table>
+		</form>
+
+		<div data-th-if="${#lists.isEmpty(cart.contents)}"> 
+			<h3>Your cart is empty</h3>
+		</div>
+
+		<div data-th-unless="${#lists.isEmpty(cart.contents)}"> 
+			<table>
+				<thead>
+					<tr>
+						<th>Item</th>
+						<th>Quantity</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr data-th-each="li: ${cart.contents}" data-th-object="${li}">
+						<td> <span data-th-text="*{name}"></span> </td>
+						<td> <span data-th-text="*{quantity}"></span> </td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<a data-th-href="@{/}"> <h3> Back </h3> </a>
+		
+	</body>
+</html>

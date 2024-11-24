@@ -9,11 +9,11 @@
 
 		<h1>List of carts for <span data-th-text="${name}"></span> </h1>
 
-		<div data-th-if="${#lists.isEmpty(carts)}">
+		<div data-th-if="${#lists.isEmpty(cartIds)}">
 			<h2>You have no carts</h2>
 		</div>
 
-		<div data-th-unless="${#lists.isEmpty(carts)}">
+		<div data-th-unless="${#lists.isEmpty(cartIds)}">
 			<h2>List of carts</h2>
 			<div data-th-each="c: ${carts}">
 				<a data-th-href="@{/cart/{id}(id=${c})}">
@@ -21,6 +21,8 @@
 				</a>
 			</div>
 		</div>
+
+		<a data-th-href="@{/cart/NEW_CART}"> <h3> New </h3> </a>
 
 		<a data-th-href="@{/}"> <h3> Back </h3> </a>
 		
