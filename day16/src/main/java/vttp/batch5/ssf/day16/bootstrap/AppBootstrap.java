@@ -3,6 +3,7 @@ package vttp.batch5.ssf.day16.bootstrap;
 import java.io.Reader;
 import java.io.StringReader;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -12,14 +13,25 @@ import jakarta.json.JsonArrayBuilder;
 import jakarta.json.JsonObject;
 import jakarta.json.JsonObjectBuilder;
 import jakarta.json.JsonReader;
+import vttp.batch5.ssf.day16.services.HttpbinService;
 
 @Component
 public class AppBootstrap implements CommandLineRunner {
 
+   @Autowired
+   private HttpbinService httpBinSvc;
+
    @Override
    public void run(String... args) {
 
+      //httpBinSvc.get();
+      //httpBinSvc.getJokes();
+      //httpBinSvc.getWithQueryParams();
+      httpBinSvc.postForm();
+      httpBinSvc.postJson();
+
       // Get an object builder
+      /*
       JsonObjectBuilder objBuilder = Json.createObjectBuilder();
       objBuilder = objBuilder
             .add("name", "fred")
@@ -82,6 +94,7 @@ public class AppBootstrap implements CommandLineRunner {
       for (int i = 0; i < numList.size(); i++)
          System.out.printf("%d: %d\n", i, numList.getInt(i));
 
+      */
 
    }
    
