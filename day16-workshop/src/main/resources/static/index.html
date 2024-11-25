@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Document</title>
+	</head>
+	<body>
+
+		<h1>Image Search</h1>
+
+		<form method="GET" action="/search">
+			<table>
+				<tr>
+					<td> Query: </td>
+					<td> <input type="text" name="query" size="30" required> </td>
+				</tr>
+				<tr>
+					<td> Limit: </td>
+					<td> <input type="number" name="limit" min="1" value="10"> </td>
+				</tr>
+				<tr>
+					<td> Rating: </td>
+					<td>
+						<select name="rating">
+							<option value="g">G</option>
+							<option value="pg" selected>PG</option>
+							<option value="pg-13">PG-13</option>
+							<option value="r">R</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td> <button type="submit">Search</button> </td>
+				</tr>
+			</table>
+		</form>
+		
+	</body>
+</html>

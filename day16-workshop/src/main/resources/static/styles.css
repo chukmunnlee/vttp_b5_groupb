@@ -1,0 +1,15 @@
+.pictures {
+   display: grid;
+   grid-template-columns: repeat(5, 1fr);
+   row-gap: 2vh;
+}
+
+.pictures>img {
+   border: 1px solid lightgray;
+   padding: 3px;
+   border-radius: 8px;
+}
+
+.pictures>img:hover {
+   border: 1px solid grey;
+}
