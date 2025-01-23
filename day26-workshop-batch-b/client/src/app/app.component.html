@@ -1,0 +1,65 @@
+<h1>Boardgame Search</h1>
+
+<form [formGroup]="searchForm" (submit)="search()">
+  <table>
+    <tr>
+      <td> Name: </td>
+      <td> <input type="text" size="30" placeholder="Search name" formControlName="q"></td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <div class="apart">
+          <button type="button" (click)="clearForm()">Clear</button>
+          <button type="submit" [disabled]="searchForm.invalid">Search</button>
+        </div>
+      </td>
+    </tr>
+  </table>
+</form>
+
+@if (result$ | async; as game) {
+  <hr>
+  @if (!!game) {
+    <table>
+      <tr>
+        <td>Name:</td>
+        <td>
+          <a [href]="game.url" target="_blank"> {{ game.name }} </a>
+        </td>
+      </tr>
+      <tr>
+        <td>Ranking:</td>
+        <td> {{ game.ranking }}</td>
+      </tr>
+      <tr>
+        <td>Image:</td>
+        <td> <img [src]="game.image"></td>
+      </tr>
+    </table>
+
+    @if(game.comments.length > 0) {
+      <table border="1" style="margin-top: 1.5vh;">
+        <thead>
+          <tr>
+            <th>User</th>
+            <th>Rating</th>
+            <th>Comment</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (c of game.comments; track $index) {
+            <tr>
+              <td> {{ c.user }} </td>
+              <td> {{ c.rating }} </td>
+              <td> {{ c.text }} </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    } @else {
+      <h3>This game has no comments </h3>
+    }
+  } @else {
+    <h2>No games with that name found</h2>
+  }
+}
