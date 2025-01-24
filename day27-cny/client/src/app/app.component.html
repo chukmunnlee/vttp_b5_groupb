@@ -1,0 +1,61 @@
+<h1>My Store</h1>
+
+<form [formGroup]="poForm" (submit)="processForm()">
+
+  <table>
+    <tr>
+      <td>Name: </td>
+      <td><input type="text" size="30" formControlName="name"></td>
+    </tr>
+    <tr>
+      <td>Address: </td>
+      <td><input type="text" size="30" formControlName="address"></td>
+    </tr>
+    <tr>
+      <td>Delivery date: </td>
+      <td><input type="date" size="30" formControlName="deliveryDate"></td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <div class="apart">
+          <button type="submit" [disabled]="invalid()">Submit</button>
+          <button type="button" (click)="addLineItem()">Add Item</button>
+        </div>
+      </td>
+    </tr>
+  </table>
+
+  @if (lineItemsArray.length > 0) {
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Quanity</th>
+          <th>Unit Price</th>
+        </tr>
+      </thead>
+      <tbody formArrayName="lineItems">
+        @for (li of lineItemsArray.controls; let idx = $index; track idx) {
+          <tr [formGroupName]="idx">
+            <td>
+              <input type="text" size="30" formControlName="name">
+            </td>
+            <td>
+              <input type="number" size="10" formControlName="quantity" min="1">
+            </td>
+            <td>
+              <input type="number" size="10" formControlName="unitPrice" min=".1" step=".1">
+            </td>
+            <td>
+              <button type="button" (click)="removeLineItem(idx)">X</button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  } @else {
+    <h2>You have an empty order</h2>
+  }
+
+
+</form>

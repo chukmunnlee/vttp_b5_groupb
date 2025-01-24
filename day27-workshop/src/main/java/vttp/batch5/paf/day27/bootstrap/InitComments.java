@@ -53,6 +53,7 @@ public class InitComments implements CommandLineRunner {
                     return d;
                 })
                 .forEach(d -> {
+                    // Batch insert is more efficient
                     commentsRepo.insertComments(d, colName);
                 });
         }
