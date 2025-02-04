@@ -1,8 +1,8 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Document</title>
         <style>
             .row {
@@ -12,61 +12,61 @@
         </style>
     </head>
     <body>
-
-        <h1> Search result for <code data-th-text="q"></code> </h1>
+        <h1>Search result for <code data-th-text="${q}"></code></h1>
 
         <div data-th-if="${#lists.isEmpty(games)}">
             <h2>Your search produces no result</h2>
         </div>
 
         <div data-th-unless="${#lists.isEmpty(games)}">
-            <table data-th-each="game: ${games}" data-th-object="${game}" border="1">
-                <tr>
-                    <td>GameId:</td>
-                    <td>
-                        <a data-th-href="*{url}" target="_blank">
-                            <span data-th-text="*{gameId}"></span>
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Name:</td>
-                    <td>
-                        <div class="row">
-                            <span data-th-text="*{name}"></span>
-                            <img data-th-src="*{image}" alt="">
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Ranking:</td>
-                    <td> <span data-th-text="*{ranking}"></span> </td>
-                </tr>
-            </table>
-
-            <div data-th-if="*{#lists.isEmpty(comments)}">
-                <h3>This game has no user comments</h3>
-            </div>
-
-            <div data-th-unless="*{#lists.isEmpty(comments)}">
-                <table style="margin-bottom: 1vh;">
-                    <thead>
-                        <tr>
-                            <th style="width: 30%;">User</th>
-                            <th style="width: 10%;">Rating</th>
-                            <th style="width: 70%;">Text</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr data-th-each="comment: *{comments}" data-th-object="${comment}">
-                            <td> <span data-th-text="*{user}"></span> </td>
-                            <td> <span data-th-text="*{rating}"></span> </td>
-                            <td> <span data-th-text="*{text}"></span> </td>
-                        </tr>
-                    </tbody>
+            <div data-th-each="game: ${games}" data-th-object="${game}">
+                <table border="1" >
+                    <tr>
+                        <td>GameId:</td>
+                        <td>
+                            <a data-th-href="*{url}" target="_blank">
+                                <span data-th-text="*{gameId}"></span>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Name:</td>
+                        <td>
+                            <div class="row">
+                                <span data-th-text="*{name}"></span>
+                                <img data-th-src="*{image}" alt="" />
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Ranking:</td>
+                        <td><span data-th-text="*{ranking}"></span></td>
+                    </tr>
                 </table>
+
+                <div data-th-if="*{#lists.isEmpty(comments)}">
+                    <h3>This game has no user comments</h3>
+                </div>
+
+                <div data-th-unless="*{#lists.isEmpty(comments)}">
+                    <table style="margin-bottom: 1vh">
+                        <thead>
+                            <tr>
+                                <th style="width: 30%">User</th>
+                                <th style="width: 10%">Rating</th>
+                                <th style="width: 70%">Text</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr data-th-each="comment: *{comments}" data-th-object="${comment}">
+                                <td><span data-th-text="*{user}"></span></td>
+                                <td><span data-th-text="*{rating}"></span></td>
+                                <td><span data-th-text="*{text}"></span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-
     </body>
 </html>
