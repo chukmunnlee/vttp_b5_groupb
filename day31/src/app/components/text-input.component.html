@@ -1,0 +1,20 @@
+
+<h3>Count: <span [innerText]="count"></span> Delta: {{ delta }}</h3>
+
+<div>
+  Steps:
+  <select (change)="updateStep($event.target)">
+    @for (s of steps; track $index) {
+      <option [value]="s">{{ s }}</option>
+    }
+  </select>
+
+</div>
+
+<hr>
+
+<div>
+  <button type="button" (click)="updateCount(-delta)"> -- </button>
+  <button type="button" (click)="updateCount(delta)"> ++ </button>
+</div>
+

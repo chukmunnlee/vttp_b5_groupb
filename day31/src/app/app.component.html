@@ -1,0 +1,22 @@
+<h1>This is my first Angular application</h1>
+
+<app-header [text]="title"></app-header>
+
+<app-text-input
+    [count]="5"
+    (newNumber)="whenNewNumber($event)">
+  </app-text-input>
+
+@if (names.length <= 0) {
+
+  <h2>The name list is empty</h2>
+
+} @else {
+
+  @for (n of names; let i = $index; track i) {
+    <app-header [text]=" n + ' ' + i"></app-header>
+  }
+
+}
+
+
