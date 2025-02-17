@@ -5,6 +5,24 @@ export interface Inventory {
   unitPrice: number
 }
 
+export interface UpdateItemEvent {
+  key: string
+  delta: number
+}
+
+export interface LineItem {
+  key: string
+  name: string
+  quantity: number
+  unitPrice: number
+  total: number
+}
+
+export interface Cart {
+  lineItems: LineItem[]
+  total: number
+}
+
 export const INVENTORY: Inventory[] = [
   {
     key: 'apple',

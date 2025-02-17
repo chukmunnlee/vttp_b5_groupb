@@ -1,1 +1,35 @@
-<p>cart works!</p>
+<h2>Your Cart</h2>
+
+@if (cart.lineItems.length <= 0) {
+  <h3>Your cart is empty</h3>
+} @else {
+
+  <table border="1">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Name</th>
+        <th>Unit Price</th>
+        <th>Quantity</th>
+        <th>Sub-total</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (li of cart.lineItems; let idx = $index; track li.key) {
+        <tr>
+          <td> {{ idx + 1 }} </td>
+          <td> {{ li.name }} </td>
+          <td> {{ li.unitPrice | currency }}</td>
+          <td> {{ li.quantity }}</td>
+          <td> {{ li.total | currency }}</td>
+        </tr>
+      }
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="4"></td>
+        <td> {{ cart.total | currency }}</td>
+      </tr>
+    </tfoot>
+  </table>
+}

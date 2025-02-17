@@ -4,18 +4,25 @@
   <h3>No inventories</h3>
 } @else {
 
-  @for (inv of inventories; track inv.key) {
-    <table>
-      <tr rowspan="3">
-        <td></td>
-      </tr>
-      <tr>
-        <td></td>
-      </tr>
-      <tr>
-        <td></td>
-      </tr>
-    </table>
+  @for (inv of inventories; let idx = $index; track inv.key) {
+
+    <div class="inventory">
+      <div>
+          <img src="/fruits/{{ inv.image }}" class="thumbnail">
+      </div>
+      <div class="inventory-items">
+        <div>
+          Name: {{ inv.name }}
+        </div>
+        <div>
+          Unit Price: {{ inv.unitPrice | currency }}
+        </div>
+        <div class="apart">
+          <button type="button" (click)="updateItem(idx, -1)">-</button>
+          <button type="button" (click)="updateItem(idx, 1)">+</button>
+        </div>
+      </div>
+    </div>
   }
 
 }

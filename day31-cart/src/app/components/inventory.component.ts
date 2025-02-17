@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
-import {Inventory} from '../models';
+import { Component, Input, Output } from '@angular/core';
+import {Inventory, UpdateItemEvent} from '../models';
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-inventory',
@@ -11,5 +12,17 @@ export class InventoryComponent {
 
   @Input()
   inventories: Inventory[] = []
+
+  @Output()
+  whenItemUpdate = new Subject<UpdateItemEvent>();
+
+  updateItem(idx: number, delta: number) {
+    console.info(`idx: ${idx}, delta: ${delta}`)
+    const event: UpdateItemEvent = {
+      key: this.inventories[idx].key,
+      delta: delta
+    }
+    this.whenItemUpdate.next(event)
+  }
 
 }

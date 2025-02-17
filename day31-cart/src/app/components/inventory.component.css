@@ -1,0 +1,23 @@
+.thumbnail {
+  height: 8vh;
+  width: auto;
+  margin-left: 2vw;
+}
+
+.inventory {
+  display: grid;
+  width: 30vw;
+  grid-template-columns: 1fr 1fr;
+  border: 1px lightgrey solid;
+  border-radius: 4px;
+  margin-bottom: 1vh;
+}
+
+.inventory-items {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.apart>button {
+  margin-right: 1vw;
+}
