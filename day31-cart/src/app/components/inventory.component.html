@@ -1,0 +1,21 @@
+<h2>Today's Special</h2>
+
+@if (inventories.length <= 0) {
+  <h3>No inventories</h3>
+} @else {
+
+  @for (inv of inventories; track inv.key) {
+    <table>
+      <tr rowspan="3">
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+      </tr>
+    </table>
+  }
+
+}
