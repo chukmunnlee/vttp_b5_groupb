@@ -1,0 +1,6 @@
+.thumbnail {
+  height: 40vh;
+  border: 1px grey solid;
+  border-radius: 8px;
+  padding: 4px;
+}

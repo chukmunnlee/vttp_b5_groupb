@@ -1,0 +1,6 @@
+.col-3 {
+  margin-top: 3vh;
+  width: 50vw;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}

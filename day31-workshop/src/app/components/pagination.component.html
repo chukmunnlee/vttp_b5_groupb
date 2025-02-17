@@ -1,0 +1,13 @@
+
+<div class="col-3">
+
+  <button type="button" (click)="paginate(-1)">Prev</button>
+
+  <select (change)="whenChangeStep($event)">
+    @for (s of step; track $index) {
+      <option [value]="s">{{ s }}</option>
+    }
+  </select>
+
+  <button type="button" (click)="paginate(1)">Next</button>
+</div>
