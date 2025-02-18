@@ -1,0 +1,16 @@
+:8080 {
+
+  log stderr {
+    format console
+  }
+
+  root * ./browser
+  try_files {path} {path}/index.html =404
+  file_server
+
+  handle_errors  {
+    rewrite * /error.html
+    templates
+    file_server
+  }
+}
