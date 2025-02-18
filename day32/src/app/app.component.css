@@ -1,0 +1,7 @@
+td, th {
+  padding: 4px;
+}
+
+.error {
+  border: red 1px solid;
+}

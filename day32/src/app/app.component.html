@@ -1,0 +1,68 @@
+<h1>Todo - v3</h1>
+
+<form [formGroup]="form" (submit)="processForm()">
+  <h3>Form valid? Invalid: {{ form.invalid }}, Valid: {{form.valid  }}</h3>
+  <h3>Pristine: {{ form.pristine }}, Dirty: {{ form.dirty }}</h3>
+  <table>
+    <tr>
+      <td>Task:</td>
+      <td>
+        <input type="text" size="30" formControlName="taskName"
+          [ngClass]="{'error': isCtrlInvalid('taskName') }">
+        Valid: {{ form.get('taskName')?.valid }}
+      </td>
+    </tr>
+    <tr>
+      <td>Due:</td>
+      <td>
+        <input type="date" formControlName="dueDate"
+          [ngClass]="{'error': isCtrlInvalid('dueDate') }">
+        Valid: {{ form.get('dueDate')?.valid }}
+      </td>
+    </tr>
+    <tr>
+      <td>Priority:</td>
+      <td>
+        <select formControlName="priority">
+          <option value="low">LOW</option>
+          <option value="med">MEDIUM</option>
+          <option value="hig">HIGH</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td> <button type="submit" [disabled]="invalid()">Save</button> </td>
+      <td> <button type="button" (click)="addActivity()">Add Activity</button> </td>
+    </tr>
+  </table>
+
+  @if (activites.controls.length <= 0) {
+    <h3>You are very free!</h3>
+
+  } @else {
+
+    <hr>
+    <table>
+      <thead>
+        <tr>
+          <th>Activity</th>
+        </tr>
+      </thead>
+      <tbody formArrayName="activities">
+        @for (act of activites.controls; let idx = $index; track act) {
+          <tr [formGroupName]="idx">
+            <td> {{ idx }}</td>
+            <td>
+              <input type="text" size="20" formControlName="activityName">
+            </td>
+            <td>
+              <button type="button" (click)="deleteActivity(idx)">X</button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+
+</form>

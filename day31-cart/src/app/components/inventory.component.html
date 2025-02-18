@@ -18,8 +18,8 @@
           Unit Price: {{ inv.unitPrice | currency }}
         </div>
         <div class="apart">
-          <button type="button" (click)="updateItem(idx, -1)">-</button>
-          <button type="button" (click)="updateItem(idx, 1)">+</button>
+          <button type="button" (click)="updateItem(inv.key, -1)">-</button>
+          <button type="button" (click)="updateItem(inv.key, 1)">+</button>
         </div>
       </div>
     </div>

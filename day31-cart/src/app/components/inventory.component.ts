@@ -16,11 +16,13 @@ export class InventoryComponent {
   @Output()
   whenItemUpdate = new Subject<UpdateItemEvent>();
 
-  updateItem(idx: number, delta: number) {
-    console.info(`idx: ${idx}, delta: ${delta}`)
+  //updateItem(idx: number, delta: number) {
+  updateItem(key: string, delta: number) {
+    console.info(`key: ${key}, delta: ${delta}`)
     const event: UpdateItemEvent = {
-      key: this.inventories[idx].key,
-      delta: delta
+      key, delta
+      //key: key,
+      //delta: delta
     }
     this.whenItemUpdate.next(event)
   }
