@@ -6,7 +6,16 @@ import java.util.List;
 
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.aggregation.Aggregation;
+import org.springframework.data.mongodb.core.aggregation.GroupOperation;
+import org.springframework.data.mongodb.core.aggregation.LimitOperation;
+import org.springframework.data.mongodb.core.aggregation.MatchOperation;
+import org.springframework.data.mongodb.core.aggregation.ProjectionOperation;
+import org.springframework.data.mongodb.core.aggregation.SortOperation;
+import org.springframework.data.mongodb.core.aggregation.UnwindOperation;
+import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.stereotype.Repository;
 
 import vttp.batch5.paf.movies.models.MovieDetails;
@@ -68,8 +77,40 @@ public class MongoMovieRepository {
  // TODO: Task 3
  // Write the native Mongo query you implement in the method in the comments
  //
- //    native MongoDB query here
- //
+ // db.getCollection("imdb").aggregate([
+ //   { $unwind: '$directors' },
+ //   { $match: { directors: { $nin: [ null, "" ] } } },
+ //   { $group: {
+ //      _id: "$directors",
+ //      imdb_ids: { $push: "$imdb_id"},
+ //      count: { $sum: 1 }
+ //   }},
+ //   { $sort: { count: -1 } },
+ //   { $limit: 5 },
+ //   { $project: { imdb_ids: 1 } }
+ // ])
+ public List<Document> getTopNProlificDirectors(int count) {
 
+   UnwindOperation unwindDirectors = Aggregation.unwind("directors");
+
+   MatchOperation filterMoviesWithoutDirectors = Aggregation.match(
+       Criteria.where("directors").nin(null, ""));
+
+   GroupOperation groupMoviesByDirectory = Aggregation.group("directors")
+      .push("imdb_id").as("imdb_ids")
+      .count().as("count");
+
+   SortOperation sortMoviesByDirector = Aggregation.sort(Sort.Direction.DESC, "count");
+
+   LimitOperation topN = Aggregation.limit(count);
+
+   ProjectionOperation imdbs = Aggregation.project("imdb_ids");
+
+   Aggregation pipeline = Aggregation.newAggregation(
+       unwindDirectors, filterMoviesWithoutDirectors, groupMoviesByDirectory,
+       sortMoviesByDirector, topN, imdbs);
+
+   return template.aggregate(pipeline, "imdb", Document.class).getMappedResults();
+ }
 
 }
