@@ -1,0 +1,15 @@
+
+<h2>Number Input {{ instanceName }}</h2>
+
+<form [formGroup]="form" (submit)="process()">
+
+  <input type="number" size="20" formControlName="num">
+
+  <div style="margin-top: 1vh;">
+    <ng-content> </ng-content>
+    <ng-content>
+      <button type="submit">Add</button>
+    </ng-content>
+  </div>
+
+</form>

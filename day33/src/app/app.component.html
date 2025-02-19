@@ -1,0 +1,23 @@
+
+<h1>Number List</h1>
+
+<div class="side-by-side">
+
+  <app-num-input instanceName="xyz">
+    <button type="button" (click)="square()" #btn>Square</button>
+    <button type="button" (click)="negate()" #btn>Negate</button>
+  </app-num-input>
+
+  <!-- #abc name - template reference -->
+  <app-num-input (onNewNumber)="whenNewNumber($event)" instanceName="abc" #abc>
+    <button type="button" (click)="square()">Square</button>
+    <button type="button" (click)="negate()">Negate</button>
+  </app-num-input>
+
+  <app-num-list [values]="nums" [latest]="newNum"></app-num-list>
+
+  <div>
+    <button type="button" (click)="abc.process()">Process ABC</button>
+  </div>
+
+</div>
