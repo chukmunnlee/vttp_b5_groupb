@@ -1,4 +1,4 @@
-:8080 {
+:${PORT:8080} {
 
   log stderr {
     format console

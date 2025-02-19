@@ -33,7 +33,8 @@ WORKDIR /www
 COPY --from=builder /src/dist/day32-workshop/browser html
 COPY Caddyfile .
 
-EXPOSE 8080
+ENV PORT=8080
+EXPOSE ${PORT}
 
 SHELL [ "/bin/sh", "-c" ]
 ENTRYPOINT caddy run --config ./Caddyfile
