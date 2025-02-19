@@ -1,0 +1,12 @@
+.full-screen {
+  width: 98vw;
+  height: 98vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#send-btn {
+  width: 8vw;
+}
