@@ -1,11 +1,18 @@
 package vttp.batch5.paf.movies.repositories;
 
+import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
+import javax.sql.RowSet;
+
+import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import vttp.batch5.paf.movies.models.MovieStats;
 
@@ -16,6 +23,10 @@ public class MySQLMovieRepository {
   public static final String SQL_INSERT_IMDB_RECORD = """
     insert into imdb(imdb_id, vote_average, vote_count, release_date, revenues, budget, runtime)
       values (?, ?, ?, ?, ?, ?, ?)
+  """;
+  public static final String SQL_SELECT_MOVIES_BY_ID = """
+    select count(*) as movies_count, sum(revenues) as total_revenue, sum(budget) as total_budget
+    from imdb where imdb_id in (%s) 
   """;
 
   @Autowired
@@ -50,6 +61,27 @@ public class MySQLMovieRepository {
   }
 
   // TODO: Task 3
+    public Optional<Document> findMoviesByIds(List<String> imdbIds) {
+    String placeholders = String.join(",", Collections.nCopies(imdbIds.size(), "?"));
+    String sql = SQL_SELECT_MOVIES_BY_ID.formatted(placeholders);
+
+    List<Document> results = new LinkedList<>();
+
+    SqlRowSet rs = template.queryForRowSet(sql, imdbIds.toArray());
+
+    if (!rs.next())
+      return Optional.empty();
+
+    Document doc = new Document();
+    //select count(*) as movies_count, sum(revenues) as total_revenue, sum(budget) as total_budget
+    doc.put("movies_count", rs.getInt("movies_count"));
+    doc.put("total_revenue", rs.getDouble("total_revenue"));
+    doc.put("total_budget", rs.getDouble("total_budget"));
+    results.add(doc);
+
+    return Optional.of(doc);
+
+  }
 
 
 }
