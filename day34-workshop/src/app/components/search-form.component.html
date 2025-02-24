@@ -1,0 +1,40 @@
+
+<h2>Giphy Search Criteria</h2>
+
+<form [formGroup]="searchForm" (submit)="search()">
+  <table>
+    <tr>
+      <td>Q:</td>
+      <td>
+        <input type="text" placeholder="Search terms" size="30"
+            formControlName="q">
+      </td>
+    </tr>
+    <tr>
+      <td>Limit:</td>
+      <td>
+        <input type="range" min="1" max="25" (change)="limitUpdated($event)"
+            value="5" formControlName="limit">
+        ({{ resultsCount }})
+      </td>
+    </tr>
+    <tr>
+      <td>Rating:</td>
+      <td>
+        <input type="radio" name="rating" value="g" formControlName="rating"> G
+        <input type="radio" name="rating" value="pg" formControlName="rating"> PG
+        <input type="radio" name="rating" value="pg-13" formControlName="rating"> PG-13
+        <input type="radio" name="rating" value="r" formControlName="rating"> R
+      </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>
+        <div class="space-between">
+          <button type="button" (click)="clear()">Clear</button>
+          <button type="submit" [disabled]="searchForm.invalid">Search</button>
+        </div>
+      </td>
+    </tr>
+  </table>
+</form>
