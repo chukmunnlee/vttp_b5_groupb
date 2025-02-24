@@ -7,7 +7,7 @@ import { firstValueFrom, map, Subject, tap } from "rxjs";
 export class GiphyService {
 
   // TODO: remove this
-  private API_KEY = "J5vsSGutHIedtmPyQZGIg4rdAcE399ID"
+  private API_KEY = "set this"
 
   private http = inject(HttpClient)
 

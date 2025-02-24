@@ -1,6 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {SearchCriteria} from '../models';
+import { GiphyService } from '../giphy.service';
 
 @Component({
   selector: 'app-search-form',
@@ -11,6 +12,7 @@ import {SearchCriteria} from '../models';
 export class SearchFormComponent implements OnInit {
 
   private fb = inject(FormBuilder)
+  private giphySvc = inject(GiphyService)
 
   protected searchForm!: FormGroup
   protected resultsCount = 5
@@ -20,12 +22,17 @@ export class SearchFormComponent implements OnInit {
   }
 
   protected search() {
-    const value: SearchCriteria = this.searchForm.value
-    console.info('>>> value: ', value)
+    const criteria: SearchCriteria = this.searchForm.value
+    console.info('>>> criteria: ', criteria)
+    this.giphySvc.search(criteria)
+        .then(result => {
+          console.info('>>> search result: ', result)
+        })
   }
 
   protected clear() {
     this.searchForm = this.createSearchForm()
+    this.giphySvc.clearResults()
   }
 
   limitUpdated($event: any) {
