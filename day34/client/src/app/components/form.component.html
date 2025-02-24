@@ -1,0 +1,34 @@
+<h2>Form</h2>
+
+<hr>
+
+  <ol>
+    @for (i of images; track $index) {
+      <li>
+        <a [href]="i">{{ i }}</a>
+      </li>
+    }
+  </ol>
+
+<hr>
+
+
+<form [formGroup]="form">
+
+  <div>
+    Name: <input type="text" formControlName="name">
+  </div>
+  <div>
+    Address: <input type="text" formControlName="address">
+  </div>
+
+  <div>
+    <button type="button" (click)="pushData()">Push Data</button>
+  </div>
+
+  <ul>
+    <li> Invalid: {{ form.invalid }} </li>
+  </ul>
+
+</form>
+

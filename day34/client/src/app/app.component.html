@@ -1,0 +1,14 @@
+
+<app-form></app-form>
+
+<div>
+  <button type="button" (click)="fetchDogImageAsPromise()">Get Dogs</button>
+</div>
+
+<hr>
+
+@for (img of dogImages; track img) {
+  <div style="margin-bottom: 4px;">
+    <img [src]="img" alt="">
+  </div>
+}
