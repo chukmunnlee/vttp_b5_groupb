@@ -22,6 +22,10 @@ export class FormComponent implements OnInit {
     })
   }
 
+  shouldSave(): boolean {
+    return this.form.dirty
+  }
+
   process() {
     const value = this.form.value
     console.info('>>> value: ', value)

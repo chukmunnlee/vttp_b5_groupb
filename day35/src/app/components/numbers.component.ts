@@ -1,5 +1,7 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-numbers',
@@ -7,18 +9,40 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './numbers.component.html',
   styleUrl: './numbers.component.css'
 })
-export class NumbersComponent implements OnInit {
+export class NumbersComponent implements OnInit, OnDestroy {
 
   private router = inject(Router)
   private activatedRoute = inject(ActivatedRoute)
+  private title = inject(Title)
 
-  numImg = ''
-  num = ''
+  protected numImg = ''
+  protected num = ''
+  protected subParams!: Subscription
+  protected subQuery!: Subscription
 
   ngOnInit(): void {
      // /number/:num
-     this.num = this.activatedRoute.snapshot.params['num']
-     this.numImg = `/numbers/number${this.num}.jpg`
+     //this.num = this.activatedRoute.snapshot.params['num']
+     this.subParams = this.activatedRoute.params.subscribe(
+      params => {
+        console.info('>>> params: ', params)
+        this.num = params['num']
+        this.numImg = `/numbers/number${this.num}.jpg`
+        console.info('>>> queryParams: ', this.activatedRoute.snapshot.queryParams['size'])
+        this.title.setTitle(`Number: ${this.num}`)
+      }
+     )
+    //  this.subQuery = this.activatedRoute.queryParams.subscribe(
+    //   params => {
+    //     console.info('>>> queryParams: ', params)
+    //   }
+    //  )
+  }
+
+  ngOnDestroy(): void {
+      console.info('>>>> unsubscribing')
+      this.subParams.unsubscribe()
+      //this.subQuery.unsubscribe()
   }
 
 }

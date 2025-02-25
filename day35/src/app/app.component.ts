@@ -15,7 +15,8 @@ export class AppComponent {
 
   numberChanged($event: any) {
     this.currNum = $event.target.value
-    console.info('>>> currNum: ', this.currNum)
+    this.router.navigate(['/number', this.currNum ], { queryParams: { size: 'small' }})
+    //console.info('>>> currNum: ', this.currNum)
   }
   showNumber() {
     this.router.navigate(['/number', this.currNum ])

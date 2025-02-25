@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-polar-bear',
@@ -6,6 +7,13 @@ import { Component } from '@angular/core';
   templateUrl: './polar-bear.component.html',
   styleUrl: './polar-bear.component.css'
 })
-export class PolarBearComponent {
+export class PolarBearComponent implements OnInit {
+
+  private  title = inject(Title)
+  private metadata = inject(Meta)
+
+  ngOnInit(): void {
+      this.title.setTitle('Home')
+  }
 
 }
