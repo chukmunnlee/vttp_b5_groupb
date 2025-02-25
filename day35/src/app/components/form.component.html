@@ -1,0 +1,25 @@
+<h2>Register Your Intrest</h2>
+
+<form [formGroup]="form" (submit)="process()">
+  <table>
+    <tr>
+      <td>Name: </td>
+      <td>
+        <input type="text" formControlName="name">
+      </td>
+    </tr>
+    <tr>
+      <td>Email: </td>
+      <td>
+        <input type="email" formControlName="email">
+      </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>
+        <button type="submit">Register</button>
+      </td>
+    </tr>
+  </table>
+
+</form>
