@@ -1,0 +1,24 @@
+<h1>Register Your Intrest</h1>
+
+<form [formGroup]="form" (submit)="register()">
+  <table>
+    <tr>
+      <td> Name: </td>
+      <td>
+        <input type="text" formControlName="name">
+      </td>
+    </tr>
+    <tr>
+      <td> Email: </td>
+      <td>
+        <input type="email" formControlName="email">
+      </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>
+        <button type="submit" [disabled]="form.invalid"> Register </button>
+      </td>
+    </tr>
+  </table>
+</form>
