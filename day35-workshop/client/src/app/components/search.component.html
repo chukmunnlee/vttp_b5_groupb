@@ -1,0 +1,23 @@
+<h1>Search Boardgames</h1>
+
+<form [formGroup]="form" (submit)="search()">
+  <table>
+    <tr>
+      <td> Search terms: </td>
+      <td> <input type="text" size="30" formControlName="q"> </td>
+      <td> <button type="submit" [disabled]="form.invalid">Search</button> </td>
+    </tr>
+  </table>
+</form>
+
+@if (results$ | async; as results) {
+  @for (g of results; track g.gid) {
+
+    <h3>
+      <a [routerLink]="['/game', g.gid]"> {{ g.name | titlecase }}</a>
+    </h3>
+
+  } @empty {
+    <h2>No games found</h2>
+  }
+}
