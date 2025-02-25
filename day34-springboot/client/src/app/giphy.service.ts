@@ -22,25 +22,11 @@ export class GiphyService {
         .set('rating', criteria.rating)
 
     return firstValueFrom<string[]>(
-      this.http.get<any>('http://localhost:8080/api/search', { params }).pipe(
-        // tap(result => {
-        //   console.info('>>>> TAP-0: ', result)
-        // }),
-        map(result => result['data']),
-        // tap(result => {
-        //   console.info('>>>> TAP-1: ', result)
-        // }),
-        // data -> any[]
-        map((data: any[]) => data.map((g: any) => g.images.fixed_height.url)),
-        // fixed_height -> string[]
-        tap(images => {
-          this.searchResults.next(images)
-        })
-      )
+      this.http.get<string[]>('http://localhost:8080/api/search', { params })
     )
-    // .then(result => {
-    //   this.searchResults.next(result)
-    //   return result
-    // })
+    .then(result => {
+       this.searchResults.next(result)
+       return result
+    })
   }
 }
