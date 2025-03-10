@@ -30,8 +30,7 @@ export class TaskStore extends ComponentStore<TaskSlice> {
       console.info('>>> toSave: ', toSave)
       return {
         tasks: [ ...slice.tasks, toSave ],
-        audit: [ ...slice.audit, `Added new task on ${new Date()}`],
-        priorityFilter: slice.priorityFilter
+        audit: [ ...slice.audit, `Added new task on ${new Date()}`]
       } as TaskSlice
     }
   )
@@ -48,8 +47,7 @@ export class TaskStore extends ComponentStore<TaskSlice> {
       })
       return {
         tasks: [ ...slice.tasks, ...toSave ],
-        audit: [ ...slice.audit, `Added ${tasks.length} tasks on ${new Date()}`],
-        priorityFilter: slice.priorityFilter
+        audit: [ ...slice.audit, `Added ${tasks.length} tasks on ${new Date()}`]
       } as TaskSlice
     }
   )
@@ -58,35 +56,23 @@ export class TaskStore extends ComponentStore<TaskSlice> {
     (slice: TaskSlice, taskId: string) => {
       return {
         tasks: slice.tasks.filter(t => t.id != taskId),
-        audit: [ ...slice.audit, `Deleted task id ${taskId} on ${new Date()}`],
-        priorityFilter: slice.priorityFilter
+        audit: [ ...slice.audit, `Deleted task id ${taskId} on ${new Date()}`]
       } as TaskSlice
     }
   )
 
-  readonly updatePriorityView = this.updater<string>(
-    (slice: TaskSlice, priority: string) => {
-      return {
-        tasks: [ ...slice.tasks ],
-        audit: [ ...slice.audit ],
-        priorityFilter: priority
-      }
-    }
-  )
-
   // Selector - query
-  readonly getTasks = this.select<Task[]>(
-    (slice: TaskSlice) => slice.tasks
-        .filter(
-          t => (slice.priorityFilter == 'all') || (slice.priorityFilter == t.priority)
+  readonly getTasks = (priority: string) => {
+    return this.select<Task[]>(
+        (slice: TaskSlice) => slice.tasks.filter(
+          task => (priority == 'all') || (task.priority == priority)
+        )
     )
-  )
+  }
+
 
   readonly getTaskCount$ = this.select<number>(
-    (slice: TaskSlice) => slice.tasks
-        .filter(
-          t => (slice.priorityFilter == 'all') || (slice.priorityFilter == t.priority)
-        ).length
+    (slice: TaskSlice) => slice.tasks.length
   )
 
 }

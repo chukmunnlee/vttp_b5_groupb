@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { TaskStore } from '../task.store';
+import { TaskStore } from '../task.store.hof';
 import { Observable, tap } from 'rxjs';
 import { Task } from '../models';
 
@@ -17,13 +17,24 @@ export class ListTasksComponent implements OnInit {
   protected allTasks: Task[] = []
 
   ngOnInit(): void {
-    this.tasks$ = this.taskStore.getTasks
+    this.tasks$ = this.taskStore.getTasks('all')
     // this.taskStore.getTasks.pipe(
     //   tap(tasks => {
     //     console.info('@@@@@@ tasks: ', tasks)
     //     this.allTasks = tasks
     //   } )
     // ).subscribe()
+  }
+
+  filterByPriority($event: any) {
+    const priority = $event.target.value
+    console.info('>>> priority: ', priority)
+    //this.taskStore.updatePriorityView(priority)
+    this.tasks$ = this.taskStore.getTasks(priority)
+  }
+
+  deleteTask(taskId: string) {
+    this.taskStore.deleteTask(taskId)
   }
 
 }

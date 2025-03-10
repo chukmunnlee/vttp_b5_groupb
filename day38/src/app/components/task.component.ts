@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Task } from '../models';
-import { TaskStore } from '../task.store';
+import { TaskStore } from '../task.store.hof';
 
 @Component({
   selector: 'app-task',

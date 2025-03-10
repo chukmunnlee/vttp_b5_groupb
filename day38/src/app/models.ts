@@ -7,4 +7,5 @@ export interface  Task {
 export interface TaskSlice {
   tasks: Task[]
   audit: string[]
+  priorityFilter: string
 }

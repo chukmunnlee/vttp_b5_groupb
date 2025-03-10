@@ -1,10 +1,25 @@
+  <div class="four-col">
+    <span></span>
+    <span></span>
+    <span>
+      <select (change)="filterByPriority($event)">
+        <option value="all" selected>ALL</option>
+        <option value="low">LOW</option>
+        <option value="medium">MEDIUM</option>
+        <option value="high">HIGH</option>
+      </select>
+    </span>
+  </div>
 
 <!-- @for (t of allTasks; track t.id) { -->
 @for (t of (tasks$ | async); track t.id) {
-  <div class="three-col">
+  <div class="four-col">
     <code>{{ t.id }}</code>
     <span>{{ t.name }}</span>
     <span>{{ t.priority | uppercase }}</span>
+    <span>
+      <button type="button" (click)="deleteTask(t.id)">X</button>
+    </span>
   </div>
 }
 @empty {
