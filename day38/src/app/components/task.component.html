@@ -1,0 +1,27 @@
+<h2>New Task</h2>
+
+<form [formGroup]="form" (submit)="processForm()">
+  <table>
+    <tr>
+      <td>Name:</td>
+      <td>
+        <input type="text" formControlName="name">
+      </td>
+    </tr>
+    <tr>
+      <td>Priority:</td>
+      <td>
+        <select formControlName="priority">
+          <option value="low">LOW</option>
+          <option value="medium">MEDIUM</option>
+          <option value="high">HIGH</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td> <button type="submit">Add</button> </td>
+    </tr>
+  </table>
+
+</form>

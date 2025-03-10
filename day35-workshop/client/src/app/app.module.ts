@@ -20,7 +20,7 @@ const appRoutes: Routes = [
     AppComponent, SearchComponent, DetailsComponent
   ],
   imports: [
-    BrowserModule, ReactiveFormsModule, RouterModule.forRoot(appRoutes)
+    BrowserModule, ReactiveFormsModule, RouterModule.forRoot(appRoutes, { useHash: true })
   ],
   providers: [ provideHttpClient(), BGGService ],
   bootstrap: [AppComponent]
