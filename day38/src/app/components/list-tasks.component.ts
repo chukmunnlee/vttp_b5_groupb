@@ -34,7 +34,8 @@ export class ListTasksComponent implements OnInit {
   }
 
   deleteTask(taskId: string) {
-    this.taskStore.deleteTask(taskId)
+    //this.taskStore.deleteTask(taskId)
+    this.taskStore.removeTask(taskId)
   }
 
 }

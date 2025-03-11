@@ -1,9 +1,11 @@
-import { Injectable } from "@angular/core";
+import { inject, Injectable } from "@angular/core";
 
 import { v4 as uuidv4 } from 'uuid'
 
 import { Task, TaskSlice } from './models'
 import { ComponentStore } from "@ngrx/component-store";
+import { catchError, concatMap, EMPTY, from, mergeMap, Observable, tap } from "rxjs";
+import { TaskRepository } from "./task.repository";
 
 const INIT: TaskSlice = {
   tasks: [],
@@ -14,10 +16,44 @@ const INIT: TaskSlice = {
 @Injectable()
 export class TaskStore extends ComponentStore<TaskSlice> {
 
+  private taskRepo = inject(TaskRepository)
+
   constructor() {
     // Initialize the store, initally the store is empty
     super(INIT)
   }
+
+  // effect - side effect
+  // saveTask(newTask)
+  //    -> save to IndexedDB
+  //    -> add to the store
+  readonly saveTask = this.effect(
+    (newTask$: Observable<Task>) =>
+      newTask$.pipe(
+        mergeMap(newTask => {
+          const toSave: Task = {
+            ...newTask,
+            id: uuidv4().substring(0, 8)
+          }
+          // convert promise to observable
+          return from(this.taskRepo.saveTask(toSave))
+        }),
+        tap(newTask => this.addTask(newTask)), // save to the store
+        catchError(() => EMPTY) // handle error catch()
+      )
+  )
+
+  // removeTask
+  // removeTask(id)
+  readonly removeTask = this.effect(
+    (taskId$:Observable<string>) =>
+      taskId$.pipe(
+        concatMap(
+          (id: string) => from(this.taskRepo.removeTask(id))
+        ),
+        tap(id => this.deleteTask(id))
+      )
+  )
 
   // mutators - update methods
   // addTask(newTask)
@@ -25,7 +61,7 @@ export class TaskStore extends ComponentStore<TaskSlice> {
     (slice: TaskSlice, newTask: Task) => {
       const toSave: Task = {
         ...newTask,
-        id: uuidv4().substring(0, 8)
+        id: !!newTask.id? newTask.id: uuidv4().substring(0, 8)
       }
       console.info('>>> toSave: ', toSave)
       return {
@@ -42,7 +78,7 @@ export class TaskStore extends ComponentStore<TaskSlice> {
       const toSave = tasks.map(t => {
         return {
           ...t,
-          id: uuidv4().substring(0, 8)
+          id: !!t.id? t.id: uuidv4().substring(0, 8)
         }
       })
       return {
@@ -69,7 +105,6 @@ export class TaskStore extends ComponentStore<TaskSlice> {
         )
     )
   }
-
 
   readonly getTaskCount$ = this.select<number>(
     (slice: TaskSlice) => slice.tasks.length
