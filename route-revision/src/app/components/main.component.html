@@ -1,0 +1,12 @@
+<h1>Agree Before Proceeding</h1>
+
+
+<div>
+  <label for="agree">Check to Proceed:  </label>
+  <input type="checkbox" id="agree" (change)="agreed($event)">
+</div>
+<br>
+<div>
+  <button type="button" [routerLink]="['/form']">Proceed</button>
+</div>
+

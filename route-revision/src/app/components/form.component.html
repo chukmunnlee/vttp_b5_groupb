@@ -1,0 +1,19 @@
+<h2>Details</h2>
+
+<form [formGroup]="form" (submit)="submit()">
+  <table>
+    <tr>
+      <td>Name:</td>
+      <td>
+        <input type="text" formControlName="name">
+      </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>
+        <button type="button" [routerLink]="['/']">Back</button>
+        <button type="submit">Add</button>
+      </td>
+    </tr>
+  </table>
+</form>
